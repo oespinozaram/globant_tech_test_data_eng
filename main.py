@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 import crud
 import models
 import schemas
+import backups
 from database import SessionLocal, engine
 
 app = FastAPI()
@@ -57,6 +58,27 @@ async def batch_jobs(jobs: List[schemas.Job], db: Session = Depends(get_db)):
 async def get_jobs(db: Session = Depends(get_db)):
     all_jobs = db.query(models.Jobs).all()
     return all_jobs
+
+
+@app.get("/jobs/backup/")
+def backup_jobs(db: Session = Depends(get_db)):
+    backups.create_jobs_backup(db)
+    return JSONResponse(content={"message": "jobs backup created successfully"},
+                        status_code=status.HTTP_201_CREATED)
+
+
+@app.get("/departments/backup/")
+def backup_departments(db: Session = Depends(get_db)):
+    backups.create_departments_backup(db)
+    return JSONResponse(content={"message": "departments backup created successfully"},
+                        status_code=status.HTTP_201_CREATED)
+
+
+@app.get("/employees/backup/")
+def backup_employees(db: Session = Depends(get_db)):
+    backups.create_employees_backup(db)
+    return JSONResponse(content={"message": "employees backup created successfully"},
+                        status_code=status.HTTP_201_CREATED)
 
 
 @app.post("/employees/", status_code=status.HTTP_201_CREATED)
