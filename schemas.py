@@ -33,7 +33,7 @@ class Job(JobBase):
 
 class EmployeeBase(BaseModel):
     name: str
-    datatime: str
+    datetime: str
 
 
 class EmployeeCreate(EmployeeBase):

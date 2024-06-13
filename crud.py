@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy.orm import Session
 import models
 import schemas
@@ -25,3 +27,36 @@ def create_employee(db: Session, employee: schemas.EmployeeCreate):
     db.commit()
     db.refresh(new_employee)
     return new_employee
+
+
+def batch_insert_jobs(db: Session, jobs: List[schemas.Job]):
+    job_list = []
+    for count, job in enumerate(jobs, start=1):
+        job_item = models.Jobs(**job.dict())
+        job_list.append(job_item)
+        if count == 1000:
+            break
+    db.bulk_save_objects(job_list)
+    db.commit()
+
+
+def batch_insert_employees(db: Session, employees: List[schemas.Employee]):
+    employee_list = []
+    for count, employee in enumerate(employees, start=1):
+        employee_item = models.HiredEmployee(**employee.dict())
+        employee_list.append(employee_item)
+        if count == 1000:
+            break
+    db.bulk_save_objects(employee_list)
+    db.commit()
+
+
+def batch_insert_departments(db: Session, departments: List[schemas.Department]):
+    department_list = []
+    for count, department in enumerate(departments):
+        department_item = models.Departments(**department.dict())
+        department_list.append(department_item)
+        if count == 1000:
+            break
+    db.bulk_save_objects(department_list)
+    db.commit()
