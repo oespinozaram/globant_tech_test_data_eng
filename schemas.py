@@ -34,6 +34,8 @@ class Job(JobBase):
 class EmployeeBase(BaseModel):
     name: str
     datetime: str
+    department_id: int
+    job_id: int
 
 
 class EmployeeCreate(EmployeeBase):
@@ -42,8 +44,6 @@ class EmployeeCreate(EmployeeBase):
 
 class Employee(EmployeeBase):
     id: int
-    department_id: int
-    job_id: int
 
     class Config:
         from_attributes = True
