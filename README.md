@@ -14,15 +14,14 @@ A continuación se detallan los pasos de cada punto de los requerimientos.
 
 Se creó una una notebook de Jupyter para esto, dentro del repositorio esta contenida en la carpeta csv2pgsql dentro del repositorio
 
-![Captura de pantalla 2024-06-14 a la(s) 9.25.51 a.m.](/Users/omar/Desktop/Captura de pantalla 2024-06-14 a la(s) 9.25.51 a.m..png)
+![csv2sql](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/csv2sql.png)
 
 Usando Python, Pandas y SQLAlchemy, se cargan los archivos separados por comas (CSV) y se descargan a los datos. 
 
 Paso 1, cargar base de datos, la bases de datos en cuestión es una PostgreSQL, vía Docker
 
 
-
-![imaegen_postgres](/Users/omar/Desktop/imaegen_postgres.png)
+![imaegen_postgres](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/imagen_postgres.png)
 
 Se busca en DockerHub y se descarga (pull), una vez descargada, se ejecuta el siguiente comando en la consola
 
@@ -34,7 +33,7 @@ Usaremos el usuario "root" para este ejemplo, el contenedor tendrá por nombre "
 
 Esto nos generará un contenedor basado en la imagen de PostgreSQL
 
-![contenedor](/Users/omar/Desktop/contenedor.png)
+![contenedor](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/contenedor.png)
 
 
 
@@ -96,7 +95,7 @@ df_jobs.to_sql('jobs', engine, if_exists='append', index=False)
 
 Después de ejecutar, se revisa que los datos hayan sido importados correctamente.
 
-![jobs](/Users/omar/Desktop/jobs.png)
+![jobs](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/jobs.png)
 
 El proceso es el mismo para el resto de los archivos. 
 
@@ -116,7 +115,7 @@ Se registran los registros que tinen faltantes, y se quedan en otro dataframe
 df_departments_w_na = df_departments[df_departments.isna().any(axis=1)]
 ```
 
-![with_na](/Users/omar/Desktop/with_na.png)
+![with_na](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/with_na.png)
 
 Con esto se cumple el requerimiento número 1.
 
@@ -165,11 +164,11 @@ Para el requerimiento 2.3, cada tabla tiene su grupo de endpoints
 
 Los endpoints se muestran a continuación:
 
-![jobsendpoins](/Users/omar/Desktop/jobsendpoins.png)
+![jobsendpoins](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/jobsendpoins.png)
 
-![dependpoints](/Users/omar/Desktop/dependpoints.png)
+![dependpoints](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/dependpoints.png)
 
-![empendpoints](/Users/omar/Desktop/empendpoints.png)
+![empendpoints](https://github.com/oespinozaram/globant_tech_test_data_eng/blob/main/imgs/empendpoints.png)
 
 #### Requerimiento 3
 
